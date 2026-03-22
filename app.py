@@ -1,4 +1,29 @@
 import streamlit as st
+# ... (other imports)
+
+# 1. Access Secrets securely
+# It checks Streamlit Cloud settings first, then falls back to sidebar if empty
+OPENAI_API_KEY = st.secrets.get("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")
+TAVILY_API_KEY = st.secrets.get("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")
+
+with st.sidebar:
+    st.header("API Configuration")
+    # If keys aren't in secrets, show the input boxes
+    if not OPENAI_API_KEY:
+        o_api = st.text_input("OpenAI API Key", type="password")
+    else:
+        o_api = OPENAI_API_KEY
+        st.success("OpenAI Key loaded from Secrets")
+
+    if not TAVILY_API_KEY:
+        t_api = st.text_input("Tavily API Key", type="password")
+    else:
+        t_api = TAVILY_API_KEY
+        st.success("Tavily Key loaded from Secrets")
+    
+    num_slides = st.slider("Number of Slides", 5, 20, 10)
+
+# Use o_api and t_api in the rest of your script...
 from pptx import Presentation
 from fpdf import FPDF
 import fitz  
