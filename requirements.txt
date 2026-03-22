@@ -4,3 +4,4 @@ langchain-openai
 langchain-community
 tavily-python
 pymupdf
+fpdf2
